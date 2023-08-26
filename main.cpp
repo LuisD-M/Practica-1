@@ -6,7 +6,10 @@ void problema3();
 void problema4();
 void problema5();
 void problema6();
-
+void problema7();
+void problema8();
+void problema9();
+void problema10();
 
 int main(){
 
@@ -66,25 +69,25 @@ int main(){
 
         case 7:
             cout<<"Problema #7."<<endl;
-
+            problema7();
             cout<<endl;
             break;
 
         case 8:
             cout<<"Problema #8."<<endl;
-
+            problema8();
             cout<<endl;
             break;
 
         case 9:
             cout<<"Problema #9."<<endl;
-
+            problema9();
             cout<<endl;
             break;
 
         case 10:
             cout<<"Problema #10."<<endl;
-
+            problema10();
             cout<<endl;
             break;
 
@@ -279,4 +282,95 @@ void problema6(){
     cout<<"la suma es: "<<suma<<endl;
 
 }
+
+void problema7(){
+    int n, aux=0, suma=0, serie;
+    cout<<"Ingresa un numero n: "; cin>>n;
+
+    for(int i=1; i<=n;){
+        serie = aux+i;
+        aux = i;                       // variable que guarda el dato anterior al ultimo.
+        i = serie;
+        cout<<serie<<endl;
+
+        if(serie<n && serie%2==0) suma += serie;    }
+
+    cout<<"el resultado de la suma es: "<<suma<<endl;   }
+
+void problema8(){
+    int a, b, c, sumatoria=0, aux=1;
+    cout<<"Ingrese el numero a: "; cin>>a;
+    cout<<"Ingrese el numero b: "; cin>>b;
+    cout<<"Ingrese el numero c: "; cin>>c;
+
+    for(int i=a; i<c;){               // ciclo para los multiplos de a
+        sumatoria += i;
+        i += a;
+        cout<<"m1"<<aux<<" + ";
+        aux++; }
+
+    aux = 1;                        // variable que ayuda a la impresion m11, m12, m21, m22.
+
+    for(int i=b; i<c;){             // ciclo para los multiplos de b
+        sumatoria += i;
+        i += b;
+        cout<<"m2"<<aux<<" + ";
+        aux++; }
+    cout<<"m00";
+    cout<<" = "<<sumatoria<<endl;
+
+
+
+
+
+
+
+
+}
+
+void problema9(){
+    int n, suma=0, aux=0, numero, potencia;
+    cout<<"Ingrese un numero entero: "; cin>>n;
+    aux = n;
+
+    while(aux!=0){
+        numero = aux%10;
+        aux /= 10;
+
+        potencia = 1;
+        for(int i=0; i<numero; i++) potencia *= numero;    //calcula potencias
+        suma += potencia;
+    }
+    cout<<"El resultado de la suma es: "<<suma<<endl;
+}
+
+void problema10(){
+    int n, primo, aux=0, con=0;
+    cout<<"Ingrese un numero: "; cin>>n;
+
+    for(int i=1; i<=100000; i++){                     //i son los numeros que se analizan si son primos
+        for(int j=1; j<100000; j++){                  //j analiza si el numero i es primo
+            if(i%j==0) aux++;    }
+
+        if( 2 == aux) con++;
+        aux=0;
+
+        if(con == n){
+            primo = i;
+            break;  }
+    }
+    cout<<"El primo numero  "<<n<<" es: "<<primo<<endl;
+
+
+
+
+
+
+
+
+
+
+
+}
+
 
