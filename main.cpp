@@ -10,6 +10,17 @@ void problema7();
 void problema8();
 void problema9();
 void problema10();
+void problema11();
+void problema12();
+void problema13();
+void problema14();
+void problema15();
+void problema16();
+
+
+
+
+int potencia(int expo);
 
 int main(){
 
@@ -93,37 +104,37 @@ int main(){
 
         case 11:
             cout<<"Problema #11."<<endl;
-
+            problema11();
             cout<<endl;
             break;
 
         case 12:
             cout<<"Problema #12."<<endl;
-
+            problema12();
             cout<<endl;
             break;
 
         case 13:
             cout<<"Problema #13."<<endl;
-
+            problema13();
             cout<<endl;
             break;
 
         case 14:
             cout<<"Problema #14."<<endl;
-
+            problema14();
             cout<<endl;
             break;
 
         case 15:
             cout<<"Problema #15."<<endl;
-
+            problema15();
             cout<<endl;
             break;
 
         case 16:
             cout<<"Problema #16."<<endl;
-
+            problema16();
             cout<<endl;
             break;
 
@@ -298,33 +309,31 @@ void problema7(){
     cout<<"el resultado de la suma es: "<<suma<<endl;   }
 
 void problema8(){
-    int a, b, c, sumatoria=0, aux=1;
+    int a, b, c, sumatoria=0, repetido;
     cout<<"Ingrese el numero a: "; cin>>a;
     cout<<"Ingrese el numero b: "; cin>>b;
     cout<<"Ingrese el numero c: "; cin>>c;
 
     for(int i=a; i<c;){               // ciclo para los multiplos de a
         sumatoria += i;
+        cout<<i<<" + ";
         i += a;
-        cout<<"m1"<<aux<<" + ";
-        aux++; }
-
-    aux = 1;                        // variable que ayuda a la impresion m11, m12, m21, m22.
+        }
 
     for(int i=b; i<c;){             // ciclo para los multiplos de b
         sumatoria += i;
+
+        if(i != a*b) cout<<i;      // imprime menos el repetido
         i += b;
-        cout<<"m2"<<aux<<" + ";
-        aux++; }
-    cout<<"m00";
+        if((i+b)<=c) cout<<" + ";
+
+        }
+    cout<<" ";
+
+    repetido = a*b;
+    if(repetido < c) sumatoria -= repetido;
+
     cout<<" = "<<sumatoria<<endl;
-
-
-
-
-
-
-
 
 }
 
@@ -348,29 +357,185 @@ void problema10(){
     int n, primo, aux=0, con=0;
     cout<<"Ingrese un numero: "; cin>>n;
 
-    for(int i=1; i<=100000; i++){                     //i son los numeros que se analizan si son primos
-        for(int j=1; j<100000; j++){                  //j analiza si el numero i es primo
+    for(int i=1; con<n; i++){                     //i son los numeros que se analizan si son primos
+        for(int j=1; j<=i; j++){                  //j analiza si el numero i es primo
             if(i%j==0) aux++;    }
 
         if( 2 == aux) con++;
+
         aux=0;
+        primo = i;   }
 
-        if(con == n){
-            primo = i;
-            break;  }
-    }
     cout<<"El primo numero  "<<n<<" es: "<<primo<<endl;
-
-
-
-
-
-
-
-
-
-
-
 }
+
+void problema11(){
+    int min=1, n, aux=0;
+
+    cout<<"Ingresa un numero: "; cin>>n;
+
+    for(int i=2; i<=n; i++){                    // Recorre todos los numeros menores al ingresado
+        for(int j=1; aux<1; j++){               // Recorre todos los numeros hasta encontrar un multiplo
+            if(j%i==0 && j%min==0){             // Condicion para encontrar el multiplo entre los numeros
+                    min = j;
+                    aux=1;  }
+        }
+        aux=0;  }
+
+    if(n<=0) cout<<"El numero ingresado es invalido."<<endl;
+    else cout<<"El minimo comun multiplo  es: "<<min<<endl;
+}
+
+void problema12(){
+    int n, primo, aux=0, numero, salida;
+    cout<<"Ingrese un numero: "; cin>>n;
+
+    numero=n;
+
+    for(int i=1; i<=n; i++){                     //i son los numeros que se analizan si son primos
+        for(int j=1; j<=i; j++){                //j analiza si el numero i es primo
+            if(i%j==0) aux++;    }
+
+        if( 2 == aux){                          // Condicion para saber que el numero i es primo
+            primo = i;
+
+            while((numero%primo)==0){          //Condicion para analizar los divisores primos del numero ingresado
+                    numero /= i;
+                    salida = i;     }
+        }
+
+        aux=0;
+        if(numero==1){
+            cout<<"El mayor factor primo de "<<n<<" es "<<salida<<endl;
+            break;
+        }
+    }
+}
+
+void problema13(){
+    int n, aux=0, suma=0;
+    cout<<"Ingrese un numero: "; cin>>n;
+
+    for(int i=1; i<n; i++){                     //i son los numeros que se analizan si son primos
+        for(int j=1; j<=i; j++){                //j analiza si el numero i es primo
+            if(i%j==0) aux++;    }
+
+        if( 2 == aux){                          // Condicion para saber que el numero i es primo
+            suma +=i;                           // suma todos los primos
+            cout<<i<<" "; }
+
+        aux=0;
+    }
+    cout<<endl;
+    cout<<"El resultado de la suma es: "<<suma<<endl;
+}
+
+void problema14(){
+    int N=0, cifras, aux, numero, suma, Re, y, mayor=0;
+
+    for(int i=100; i<1000; i++){
+        for (int j=100; j<1000; j++) {         //genera multiplicacion de numeros de 3 cifras
+            N = i*j;
+
+            aux = N;
+            cifras = 0;
+            while(aux>=1){         //Calcula el numero de cifras del numero generado
+                aux /= 10;
+                cifras++;     }
+
+            numero = N;
+            y = cifras - 1;        //-1 por que las base es 10 y son 2 cifras.
+            suma = 0;
+            for(int i=0; i<cifras; i++){                   // ciclo que recorre todas las cifras del numero generado
+                Re = numero % 10;
+                numero /= 10;
+                suma = suma + Re*potencia(y);                    //suma es el numero alreves del original con la potencia
+                y--;        }
+
+            if(suma == N){
+                cout<<i<<" * "<<j<<" = "<<N<<endl;
+                if(suma >= mayor) mayor = suma;
+            }
+
+        }       // llave del for pequeño
+    }           // llave del for mayor
+
+    cout<<"El numero palindromo mayor generado es: "<<mayor<<endl;
+    cout<<cifras<<endl;
+}
+
+void problema15(){
+    int n, suma=1, contador=0, incremento=2;
+    cout<<"Ingrese un numero impar: "; cin>>n;
+
+    for(int i=1; contador<(n/2);){                      // iteraciones n/2, sin contar el 1
+        for(int j=1; j<=4;j++){                        // numero de elementos que se suman en cada iteracion
+            i = i+incremento;                          // i es el numero que se calcula para sumar
+            cout<<i<<endl;
+            suma = suma+i;
+        }
+        contador++;
+        incremento += 2;                             // luego de cada iteracion, el numero i incrementa 2 unidades mas
+    }                                               // respecto al anterior.
+    cout<<endl;
+    cout<<suma<<endl;
+}
+
+void problema16(){
+    int n, contador=0, mayor=0, elemento=0, indicador=0;
+
+    cout<<"Ingrese un numero: "; cin>>n;
+
+    for(int i=n; 1<i; i--){
+
+        elemento=i;
+        while(indicador == 0){
+
+            if((elemento%2)==0){
+                cout<<elemento<<", ";
+                elemento /=2;
+                contador++;
+            }
+
+            else if(elemento==1){                       // se acaba la serie
+                if(contador > mayor) mayor=contador;
+                cout<<elemento<<" terminos: "<<contador<<endl;;
+                indicador =1;
+            }
+
+            else if((elemento%2)!= 0){
+                 cout<<elemento<<", ";
+                elemento = 3*elemento + 1;
+                contador++;      }
+
+        }
+        contador=0;
+        indicador=0;
+    }
+}
+
+
+
+
+
+int potencia(int exp){
+    int w=1;
+    for(int m=1;m<=exp; m++)
+        w*=10;
+
+    return w;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
