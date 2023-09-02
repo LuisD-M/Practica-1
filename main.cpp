@@ -16,6 +16,7 @@ void problema13();
 void problema14();
 void problema15();
 void problema16();
+void problema17();
 
 
 
@@ -140,13 +141,12 @@ int main(){
 
         case 17:
             cout<<"Problema #17."<<endl;
-
+            problema17();
             cout<<endl;
             break;
 
         default:
             cout<<"Se ingreso un valor invalido."<<endl;
-
             cout<<endl;
             break;
 
@@ -214,20 +214,19 @@ int problema2(int plata){
 void problema3(){
     int mes, dia;
     cout<<"Ingrese el numero del mes: ";cin>>mes;
-
     cout<<"Ingrese el dia del mes: "; cin>>dia;
 
     if(mes>0 && mes<13){
-        if(mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12){
+        if(mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12){                 // meses de 31 dias
             if(dia>0 && dia<32) cout<<dia<<"/"<<mes<<" es una fecha valida."<<endl;
             else cout<<dia<<"/"<<mes<<" es una fecha invalida."<<endl; }
 
-        else if(mes==4 || mes==6 || mes==9 || mes==11){
+        else if(mes==4 || mes==6 || mes==9 || mes==11){                                          // meses de 30 dias
                 if(dia>0 && dia<31) cout<<dia<<"/"<<mes<<" es una fecha valida."<<endl;
                 else cout<<dia<<"/"<<mes<<" es una fecha invalida."<<endl; }
 
         else{
-                if(dia>0 && dia<29) cout<<dia<<"/"<<mes<<" es una fecha valida."<<endl;
+                if(dia>0 && dia<29) cout<<dia<<"/"<<mes<<" es una fecha valida."<<endl;           //febrero
                 else if(dia==29) cout<<dia<<"/"<<mes<<" es una fecha valida en bisiesto."<<endl;
                 else cout<<dia<<"/"<<mes<<" es una fecha invalida."<<endl;}
     }
@@ -239,9 +238,9 @@ void problema4(){
     cout<<"Ingrese el primero numero: "; cin>>n1;
     cout<<"Ingrese el segundo numero: "; cin>>n2;
 
-    if((n1/100)<24 && (n1%100)<60){
-        if((n2/100)<24 && (n2%100)<60){
-                if((n1%100 + n2%100)>59){
+    if((n1/100)<24 && (n1%100)<60){                                                      //analisa numero 1 si es valido
+        if((n2/100)<24 && (n2%100)<60){                                                  //analisa numero 2 si es valido
+                if((n1%100 + n2%100)>59){                                                //analiza minutos
                     auxmin = 1;
                     sumin = n1%100 + n2%100 - 60;     }
                 else{
@@ -251,8 +250,8 @@ void problema4(){
                 suhora = auxmin + n1/100 + n2/100;
 
                 if(suhora > 23){
-                    suhora -= 24;
-                    cout<<"La hora es: "<<suhora<<":"<<sumin<<" del siguiente dia"<<endl;  }
+                    suhora -= 24;                                                   //resta 24 por que es un relock 24 horas max
+                    cout<<"La hora es: "<<suhora<<":"<<sumin<<endl;  }
                 else cout<<"La hora es: "<<suhora<<":"<<sumin<<endl;
         }
         else cout<<n2<<" es un tiempo invalido"<<endl;
@@ -263,15 +262,15 @@ void problema5(){
     int N;
     cout<<"Ingrese un numero impar N: "; cin>>N;
     if(N%2 != 0){
-        for(int i=1; i<=N/2 +1; i++){                   // ciclo de las primeras lineas lineas numero par
-            for(int j=0; j<=(N/2)-i; j++) cout<<" ";
-            for(int j=1; j<=(2*i-1); j++) cout<<"*";
+        for(int i=1; i<=N/2 +1; i++){                                   // ciclo de las primeras lineas lineas numero par
+            for(int j=0; j<=(N/2)-i; j++) cout<<" ";                    //ciclo imprime espacios decreciente en cada linea
+            for(int j=1; j<=(2*i-1); j++) cout<<"*";                    //ciclo imprime * creciente en cada linea
             for(int j=0; j<=(N/2)-i; j++) cout<<" ";
             cout<<endl; }
 
-        for(int i=1; i<=N/2; i++){                     //Ciclo para las ultimas lineas las que faltan
-            for(int j=0; j<i; j++) cout<<" ";
-            for(int j=0; j<(N-2*i); j++) cout<<"*";
+        for(int i=1; i<=N/2; i++){                                      //Ciclo para las ultimas lineas las que faltan impar
+            for(int j=0; j<i; j++) cout<<" ";                           //ciclo que imprime espacios creciente
+            for(int j=0; j<(N-2*i); j++) cout<<"*";                     //ciclo imprime * decreciente, 2 menos en cada linea
             for(int j=0; j<i; j++) cout<<" ";
             cout<<endl;
         }
@@ -284,13 +283,12 @@ void problema6(){
     float suma=0;
     cout<<"Ingrese el numero de elementos de la serie: "; cin>>n;
 
-    for(int i=0; i<n; i++){
-        for(int j=1; j<=i; j++) factorial *=j;
+    for(int i=0; i<n; i++){                                           //ciclo recorre el numero terminos
+        for(int j=1; j<=i; j++) factorial *=j;                        //ciclo que encuentra el factorial del elemento de la serie
         suma += 1.0/(float)factorial;
-        cout<<factorial<<endl;
         factorial = 1;
     }
-    cout<<"la suma es: "<<suma<<endl;
+    cout<<"e es aproximadamente: "<<suma<<endl;
 
 }
 
@@ -298,10 +296,11 @@ void problema7(){
     int n, aux=0, suma=0, serie;
     cout<<"Ingresa un numero n: "; cin>>n;
 
-    for(int i=1; i<=n;){
-        serie = aux+i;
-        aux = i;                       // variable que guarda el dato anterior al ultimo.
-        i = serie;
+    cout<<"1"<<endl;
+    for(int i=1; i<n;){                                       //ciclo que recorre los terminos de la serie menores al ingresado
+        serie = aux+i;                                        //calcula el nuevo dato de la serie
+        aux = i;                                              // variable que guarda el dato anterior al ultimo.
+        i = serie;                                            // analiza condicion del ciclo y tiene el ultimo dato
         cout<<serie<<endl;
 
         if(serie<n && serie%2==0) suma += serie;    }
@@ -309,46 +308,41 @@ void problema7(){
     cout<<"el resultado de la suma es: "<<suma<<endl;   }
 
 void problema8(){
-    int a, b, c, sumatoria=0, repetido;
+    int a, b, c, sumatoria;
     cout<<"Ingrese el numero a: "; cin>>a;
     cout<<"Ingrese el numero b: "; cin>>b;
     cout<<"Ingrese el numero c: "; cin>>c;
 
-    for(int i=a; i<c;){               // ciclo para los multiplos de a
+    sumatoria=a;                                          // inicia con el primer elemento para poder imprimir la serie
+    cout<<a;                                              // Imprime el primer elemento
+    for(int i=2*a; i<c;){                                 // ciclo para los multiplos de a
         sumatoria += i;
-        cout<<i<<" + ";
-        i += a;
+        cout<<" + "<<i;
+        i += a;                                           //aumenta al proximo multiplo de a
         }
 
-    for(int i=b; i<c;){             // ciclo para los multiplos de b
-        sumatoria += i;
+    for(int i=b; i<c;){                                   // ciclo para los multiplos de b
+        if(i%a != 0){                                     // Condicion de no sumar los multiplos de ambos numeros
+            sumatoria += i;
+            if((i+b)<=c) cout<<" + "<<i;  }
 
-        if(i != a*b) cout<<i;      // imprime menos el repetido
-        i += b;
-        if((i+b)<=c) cout<<" + ";
-
+        i += b;                                          //aumenta al proximo multiplo de b
         }
     cout<<" ";
-
-    repetido = a*b;
-    if(repetido < c) sumatoria -= repetido;
-
     cout<<" = "<<sumatoria<<endl;
-
 }
 
 void problema9(){
-    int n, suma=0, aux=0, numero, potencia;
+    int n, suma=0, numero, pote;
     cout<<"Ingrese un numero entero: "; cin>>n;
-    aux = n;
 
-    while(aux!=0){
-        numero = aux%10;
-        aux /= 10;
+    while(n!=0){
+        numero = n%10;                                                                 //toma el ultimo digito
+        n /= 10;                                                                       //forma el nuevo numero
 
-        potencia = 1;
-        for(int i=0; i<numero; i++) potencia *= numero;    //calcula potencias
-        suma += potencia;
+        pote = 1;                                                                  //guarda las potencias cada que se *
+        for(int i=0; i<numero; i++) pote *= numero;                                //calcula potencias
+        suma += pote;
     }
     cout<<"El resultado de la suma es: "<<suma<<endl;
 }
@@ -357,16 +351,18 @@ void problema10(){
     int n, primo, aux=0, con=0;
     cout<<"Ingrese un numero: "; cin>>n;
 
-    for(int i=1; con<n; i++){                     //i son los numeros que se analizan si son primos
+    for(int i=1; con<n; i++){                     //i son los numeros que se analizan si son primos, el ciclo termina cuando se encuentra el n enesimo primo
         for(int j=1; j<=i; j++){                  //j analiza si el numero i es primo
-            if(i%j==0) aux++;    }
+            if(i%j==0) aux++;    }               // condicion para saber si es primo
 
-        if( 2 == aux) con++;
+        if( 2 == aux) con++;                    //si aux=2, un numero es primo por que solo tiene 2 divisores enteros
 
         aux=0;
         primo = i;   }
 
-    cout<<"El primo numero  "<<n<<" es: "<<primo<<endl;
+    if(n>0) cout<<"El primo numero  "<<n<<" es: "<<primo<<endl;
+    else cout<<"El numero ingresado  "<<n<<" es invalido "<<endl;
+
 }
 
 void problema11(){
@@ -482,41 +478,87 @@ void problema15(){
 }
 
 void problema16(){
-    int n, contador=0, mayor=0, elemento=0, indicador=0;
+    int n, contador=0, mayor=0, elemento=0, indicador=0, elementomayor;
 
     cout<<"Ingrese un numero: "; cin>>n;
 
-    for(int i=n; 1<i; i--){
+    for(int i=n; 1<i; i--){                            //ciclo para analizar los elementos
 
         elemento=i;
         while(indicador == 0){
 
-            if((elemento%2)==0){
-                cout<<elemento<<", ";
+            if((elemento%2)==0){                     //Analiza los pares y calcula el nuevo elemento
                 elemento /=2;
+                contador++;     }
+
+            else if(elemento==1){                         // se acaba la serie
                 contador++;
+                if(contador > mayor){
+                    mayor=contador;                       //Guarda el mayor de terminos de la serie
+                    elementomayor=i;    }
+
+                indicador =1;                             // señal para que salga del ciclo
             }
 
-            else if(elemento==1){                       // se acaba la serie
-                if(contador > mayor) mayor=contador;
-                cout<<elemento<<" terminos: "<<contador<<endl;;
-                indicador =1;
-            }
-
-            else if((elemento%2)!= 0){
-                 cout<<elemento<<", ";
+            else if((elemento%2)!= 0){                //Analiza los impares y calcula el nuevo elemento
                 elemento = 3*elemento + 1;
                 contador++;      }
 
-        }
+        }         //ciclo while
+
         contador=0;
         indicador=0;
     }
+
+    cout<<"La serie mas larga es con la semilla "<<elementomayor<<", teniendo "<<mayor<<" terminos."<<endl;
+
+    elemento=elementomayor;
+    cout<<"La serie de la semilla "<<elemento<<" es: ";
+    while(indicador == 0){
+
+        if((elemento%2)==0){                     //Analiza los pares y calcula el nuevo elemento
+            cout<<elemento<<", ";
+            elemento /=2;   }
+
+        else if(elemento==1){                         // se acaba la serie
+            indicador =1;                             // señal para que salga del ciclo
+            cout<<elemento<<endl;;
+        }
+
+        else if((elemento%2)!= 0){                //Analiza los impares y calcula el nuevo elemento
+            cout<<elemento<<", ";
+            elemento = 3*elemento + 1;
+             }
+    }
+
+
+
+
+
 }
 
+void problema17(){
+    int k, cont=1, suma=0, divisores, aux=0;
+    cout<<"Ingrese un numero: "; cin>>k;
 
+    for(int i=0; aux!=1; i++){                    //Ciclo que realiza iteracioes hasta encontrar el valor
+        suma = cont+suma;                        //condicion pa encontrar los numeros triangulares.
+        cont++;                                  //Posicion donde se va a escribir el nuevo numero
+        cout<<suma<<":";
 
+        divisores=0;
+        for(int j=1; j<=suma; j++){             //ciclo que analiza los divisores (j) del numero triangular(suma)
+            if(suma%j==0){                     // si se cumple la condicion es un divisor
+                divisores++;
+                cout<<" "<<j;     }
+        }
 
+        cout<<endl;
+
+        if(divisores>k) aux=1;    //Condicion para saber si se encontro el numero, condicion para cerrar ciclo grande
+    }
+    cout<<"El numero es: "<<suma<<" que tiene "<<divisores<<"."<<endl;
+}
 
 int potencia(int exp){
     int w=1;
